@@ -49,14 +49,29 @@ function Feed() {
 
   return (
     <div key={post._id} className="post-card">
-      <p>{post.content}</p>
-      <small>{new Date(post.createdAt).toLocaleString()}</small>
+      <div className="post-header">
+        <img
+          src={`https://i.pravatar.cc/50?u=${post._id}`}
+          alt="avatar"
+          className="avatar"
+        />
+        <div>
+          <strong>User</strong>
+          <div className="timestamp">
+            {new Date(post.createdAt).toLocaleString()}
+          </div>
+        </div>
+      </div>
+
+      <p className="post-content">{post.content}</p>
+
       <div style={{ color, fontWeight: "bold", marginTop: "5px" }}>
         {sentimentLabel}
       </div>
     </div>
   );
 })}
+
 
       </div>
     </div>
