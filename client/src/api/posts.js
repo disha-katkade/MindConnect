@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/posts";
+const API_URL = "https://mindconnect-k332.onrender.com/api/posts";
 
 export const createPost = async (postData) => {
   const res = await fetch(API_URL, {
