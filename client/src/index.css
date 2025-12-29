@@ -152,8 +152,6 @@ textarea {
 }
 
 
-
-
 .home {
   text-align: center;
   padding: 80px 20px;
@@ -219,6 +217,31 @@ textarea {
   border: none;
   border-radius: 6px;
   font-size: 16px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #1e293b;
+  color: white;
+}
+
+.navbar a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.logout-btn {
+  margin-left: 15px;
+  padding: 6px 12px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 

@@ -13,7 +13,9 @@ function Login() {
 
     if (data.token) {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       alert("Login successful");
+      window.dispatchEvent(new Event("storage"));
       navigate("/feed");
 
     } else {

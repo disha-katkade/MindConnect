@@ -7,6 +7,8 @@ function Feed() {
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
   const sentiment = new Sentiment();
+  const token = localStorage.getItem("token");
+
 
   const loadPosts = async () => {
     const data = await getPosts();
@@ -14,6 +16,10 @@ function Feed() {
   };
 
   const handlePost = async () => {
+    if (!token) {
+  alert("Please login to post");
+  return;
+}
     if (!content) return;
     await createPost({ content, author: "Anonymous" });
     setContent("");
@@ -29,12 +35,20 @@ function Feed() {
       <h2>Community Feed</h2>
 
       <textarea
-        placeholder="Share how you're feeling..."
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
+  value={content}
+  onChange={(e) => setContent(e.target.value)}
+  placeholder={
+    token
+      ? "Share your thoughts..."
+      : "Login to post and interact"
+  }
+  disabled={!token}
+/>
 
-      <button onClick={handlePost}>Post</button>
+<button onClick={handlePost} disabled={!token}>
+  Post
+</button>
+
 
       <div className="posts">
         {posts.map((post) => {

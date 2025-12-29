@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Feed from "./pages/Feed";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 
 function App() {
   return (
@@ -19,6 +21,15 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/feed" element={<Feed />} />
+        <Route
+  path="/feed"
+  element={
+    <ProtectedRoute>
+      <Feed />
+    </ProtectedRoute>
+  }
+/>
+
       </Routes>
       <Footer />
     </>

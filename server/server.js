@@ -16,6 +16,7 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/posts", require("./routes/post"));
 
 
+
 app.get("/", (req, res) => {
   res.send("MindConnect Backend is Running 🚀");
 });

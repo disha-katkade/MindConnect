@@ -1,16 +1,63 @@
-import { Link } from "react-router-dom";
-import "./Navbar.css";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+const getUserFromStorage = () => {
+  try {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  } catch {
+    return null;
+  }
+};
+
+
+const Navbar = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(getUserFromStorage());
+
+  useEffect(() => {
+    const syncUser = () => {
+      setUser(getUserFromStorage());
+    };
+
+    window.addEventListener("storage", syncUser);
+    syncUser();
+
+    return () => window.removeEventListener("storage", syncUser);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <nav className="navbar">
-      <h2 className="logo">MindConnect</h2>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/login">Login</Link></li>
-      </ul>
+      <h2>MindConnect</h2>
+
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+
+        {user ? (
+          <>
+            <span style={{ marginLeft: "15px", fontWeight: "bold" }}>
+              Hi, {user.name}
+            </span>
+            <button onClick={handleLogout} className="logout-btn">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
-}
+};
+
+export default Navbar;
